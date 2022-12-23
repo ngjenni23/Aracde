@@ -39,7 +39,8 @@ header {
 
 #optionMenu {
     font-family: 'Press Start 2P', cursive;
-    font-size: 1em;
+    font-size: 15px;
+    background-color: white;
 }
 #boardContainer {
     margin: 30px;
@@ -72,4 +73,17 @@ header {
 
 .cell:nth-child(n+4) {
     border-top: 3px solid white;
+}
+
+#buttons * {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15px;
+}
+
+button:active {
+    background-color: white;
+}
+
+button:hover {
+    background-color: gray;
 }
