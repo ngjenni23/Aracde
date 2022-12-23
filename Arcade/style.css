@@ -1,0 +1,26 @@
+html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    background-color: black;
+    
+}
+body {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+header {
+    font-size: 3rem;
+}
+#gameList {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+}
+#gameList * {
+    margin: 20px;
+}
