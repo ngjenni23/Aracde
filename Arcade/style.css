@@ -24,3 +24,18 @@ header {
 #gameList * {
     margin: 20px;
 }
+a:link {
+    color: white;
+    text-decoration: none;
+}
+a:visited {
+    color: white;
+}
+a:hover {
+    color: cyan;
+    text-decoration: underline;
+}
+a:active {
+    color: blue;
+    text-decoration: underline;
+}
