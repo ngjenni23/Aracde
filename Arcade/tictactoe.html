@@ -1,44 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styletictactoe.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-
-    <title>Tic-Tac-Toe</title>
+    <script src="app.js" defer></script>
+    <title>Jen Nguyen's Snake</title>
 </head>
-
 <body>
-    <header>Tic-Tac-Toe</header>
-    <p>Get three in a row to win!</p>
-    <div id="playerSelection">
-        <p>Select player: </p>
-        <select id="optionMenu">
-            <option>Player 1 - X</option>
-            <option>Player 2 - O</option>
-        </select>
+    <h1 id="title">Snake</h1>
+    <div class="run">
+        <p id="score"></p>
+        <p id="round"></p>
     </div>
-    <div id="boardContainer">
-        <div class="board">
-            <div class="cell"><span></span></div>
-            <div class="cell"><span></span></div>
-            <div class="cell"><span></span></div>
-            <div class="cell"><span></span></div>
-            <div class="cell"><span></span></div>
-            <div class="cell"><span></span></div>
-            <div class="cell"><span></span></div>
-            <div class="cell"><span></span></div>
-            <div class="cell"><span></span></div>
-        </div>
-    </div>
-    <div id = "buttons">
-        <button onclick="window.location.reload();" id="resetButton">Reset Game</button>
-        <button onclick="location.href='index.html';" id = "homeButton">Return Home</button>
+    <canvas id="board" width="400" height="400"></canvas>
+    <div>
+        <button id="start">Start Game</button>
+        <button id="reset">Reset Game</button>
     </div>
 </body>
-<script src="app.js"></script>
-
 </html>

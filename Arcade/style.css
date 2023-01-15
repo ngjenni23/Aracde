@@ -1,41 +1,48 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+}
+
 html {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Press Start 2P', cursive;
     color: white;
-    background-color: black;
-    
 }
+
 body {
     display: flex;
+    align-items: center;
     justify-content: center;
-    text-align: center;
     flex-direction: column;
+    background-color: black;
 }
-header {
+
+h1 {
+    margin: 20px;
+    text-align: center;
     font-size: 3rem;
+    color: white;
 }
-#gameList {
-    list-style-type: none;
+
+.run {
     display: flex;
+    width: 400px;
     flex-direction: row;
+    justify-content: space-between;
+
 }
-#gameList * {
+
+#board {
+    border: 4px solid cyan;
+    margin-bottom: 20px;
+}
+
+#reset {
     margin: 20px;
 }
-a:link {
-    color: white;
-    text-decoration: none;
-}
-a:visited {
-    color: white;
-}
-a:hover {
-    color: cyan;
-    text-decoration: underline;
-}
-a:active {
-    color: blue;
-    text-decoration: underline;
+
+button {
+    padding: 10px;
 }
