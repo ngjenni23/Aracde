@@ -41,9 +41,9 @@ startButton.addEventListener("click", function () {
     startButton.style.display = "none";
     board.style.display = "block";
     subtitle.style.display = "flex";
+    scoreDisplay.innerText = `Score: ${score}`;
+    roundDisplay.innerText = `Round: ${round}`;
     renderBoard();
-    renderScore();
-    renderRound();
 });
 
 function renderBoard () {
@@ -59,6 +59,13 @@ function renderBoard () {
     renderSnake();
     setTimeout(renderBoard, 1000 / speed);
 
+    /*let speedIncrease = false;
+    if (score > 3 && !speedIncrease) {
+        speed += 3;
+        speedIncrease = true;
+        console.log('score', score);
+    }*/ 
+    //unoptimized score inc
     if (score > 3) {
         speed = 9;
     }
@@ -138,18 +145,9 @@ function checkEatApple () {
         appleY = Math.floor(Math.random() * boardSize);
         snakeBody++;
         score++;
+        scoreDisplay.innerText = `Score: ${score}`;
         console.log('score', score);
     }
-}
-
-//SCORE DISPLAY NOT UPDATING
-function renderScore () {
-    scoreDisplay.innerText = `Score: ${score}`;
-}
-//ROUND NOT RENDERING
-function renderRound () {
-    roundDisplay.innterText = `Round: ${round}`;
-    console.log('round', round);
 }
 
 document.body.addEventListener('keydown', moveDirection);
@@ -185,22 +183,31 @@ function moveDirection(event) {
     }
 }
 
-//Does not fully reset game
 resetButton.addEventListener("click", function () {
+    clearBoard();
+
     snakeSegments.length = 0;
+    snakeBody = 2;
     snakeHeadX = 10;
     snakeHeadY = 10;
+    renderSnake();
 
-    snakeBody = 2;
-
-    appleX = 5;
-    appleY = 5;
+    appleX = 5
+    appleY = 5
+    renderApple();
 
     speedX = 0;
     speedY = 0;
 
+    setTimeout(renderBoard, 1000 / speed);
+
     score = 0;
+    scoreDisplay.innerText = `Score: ${score}`;
+
     round++;
+    console.log('round', round);
+    roundDisplay.innerText = `Round: ${round}`;
+
     title.innerText = "Snake";
     title.style.color = "white";
     
