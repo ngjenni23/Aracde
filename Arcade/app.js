@@ -3,6 +3,7 @@ const context = board.getContext("2d");
 const scoreDisplay = document.getElementById("score");
 const roundDisplay = document.getElementById("round");
 const title = document.getElementById("title");
+const subtitle = document.querySelector(".subtitle");
 const startButton = document.getElementById("start")
 const resetButton = document.getElementById("reset");
 class SnakePart {
@@ -11,7 +12,7 @@ class SnakePart {
         this.y = y;
     }
 }
-let speed = 5;
+let speed = 6;
 let boardSize = 20;
 let cellSize = board.width / boardSize - 2;
 
@@ -29,8 +30,20 @@ let speedY = 0;
 let score = 0;
 let round = 1;
 
+window.onload = function startScreen () {
+    board.style.display = "none";
+    resetButton.style.display = "none";
+    subtitle.style.display = "none";
+    startButton.style.margin = "200px";
+}
+
 startButton.addEventListener("click", function () {
+    startButton.style.display = "none";
+    board.style.display = "block";
+    subtitle.style.display = "flex";
     renderBoard();
+    renderScore();
+    renderRound();
 });
 
 function renderBoard () {
@@ -46,16 +59,16 @@ function renderBoard () {
     renderSnake();
     setTimeout(renderBoard, 1000 / speed);
 
-    if (score > 2) {
-        speed = 8;
+    if (score > 3) {
+        speed = 9;
     }
     if (score > 6) {
         speed = 11;
     }
-    if (score > 10) {
+    if (score > 9) {
         speed = 14;
     }
-    if (score > 15) {
+    if (score > 14) {
         speed = 17;
     }
 }
@@ -83,6 +96,7 @@ function checkGameOver () {
     if (gameOver) {
         title.innerText = "Game Over!";
         title.style.color = "red";
+        resetButton.style.display = "block";
     }
     return gameOver;
 }
@@ -173,14 +187,22 @@ function moveDirection(event) {
 
 //Does not fully reset game
 resetButton.addEventListener("click", function () {
+    snakeSegments.length = 0;
+    snakeHeadX = 10;
+    snakeHeadY = 10;
 
-    let score = 0;
+    snakeBody = 2;
 
+    appleX = 5;
+    appleY = 5;
+
+    speedX = 0;
+    speedY = 0;
+
+    score = 0;
     round++;
     title.innerText = "Snake";
     title.style.color = "white";
     
 });
 
-renderScore();
-renderRound();
