@@ -29,14 +29,17 @@ h1 {
 .subtitle{
     display: flex;
     width: 400px;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+}
 
+.scoreRound {
+    display: flex;
+    justify-content: row;
+    justify-content: space-between;
 }
 
 #board {
     border: 4px solid cyan;
-    margin-bottom: 20px;
 }
 
 #reset {

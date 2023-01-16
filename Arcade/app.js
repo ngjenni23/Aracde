@@ -5,6 +5,7 @@ const roundDisplay = document.getElementById("round");
 const highestScoreDisplay = document.getElementById("highestScore");
 const title = document.getElementById("title");
 const subtitle = document.querySelector(".subtitle");
+const select = document.querySelector(".difficulties");
 const startButton = document.getElementById("start")
 const resetButton = document.getElementById("reset");
 class SnakePart {
@@ -13,7 +14,9 @@ class SnakePart {
         this.y = y;
     }
 }
+
 let speed = 6;
+
 let boardSize = 20;
 let cellSize = board.width / boardSize - 2;
 
@@ -39,7 +42,7 @@ window.onload = function startScreen () {
     board.style.display = "none";
     resetButton.style.display = "none";
     subtitle.style.display = "none";
-    startButton.style.margin = "200px";
+    startButton.style.margin = "100px";
 }
 
 startButton.addEventListener("click", function () {
@@ -49,7 +52,6 @@ startButton.addEventListener("click", function () {
     scoreDisplay.innerText = `Current Score:${score}`;
     roundDisplay.innerText = `Round:${round}`;
     highestScoreDisplay.innerText = `Highest Score:${highestScore}`;
-
     renderBoard();
 });
 
@@ -60,34 +62,47 @@ function renderBoard () {
         return;
     }
     
-    if (score > 2 && !speedIncrease) {
-        speed += 3;
+    //Couldn't figure out how to make the speed once inc whenever the score is a multiple of 3 
+    /*if (score %3 && !speedIncrease) {
+        speed  = speed*3;
         console.log('speedIncrease:', speedIncrease);
         speedIncrease = true;
         console.log('speed', speed);
         console.log('speedIncrease:', speedIncrease)
-    }
+    } */
+
     clearBoard();
     checkEatApple();
     renderApple();
     renderSnake();
     setTimeout(renderBoard, 1000 / speed);
 
+    if (score >= 3 && score < 6 && !speedIncrease){
+        speed = speed + 2;
+        speedIncrease = true
+        console.log('speed', speed);
+    }
+    if (score >= 6 && score < 10 && speedIncrease) {
+        speed = speed + 2;
+        speedIncrease = false
+        console.log('speed', speed);
+    }
+    if (score >= 10 && score < 15 && !speedIncrease) {
+        speed = speed + 2;
+        speedIncrease = true
+        console.log('speed', speed);
+    }
+    if (score >= 15 && score < 21 && speedIncrease) {
+        speed = speed + 3;
+        speedIncrease = false
+        console.log('speed', speed);
+    }
+    if (score >= 21 && !speedIncrease) {
+        speed = speed + 3;
+        speedIncrease = true
+        console.log('speed', speed);
+    }
     
-    //unoptimized score inc
-    /*
-    if (score > 3) {
-        speed = 9;
-    }
-    if (score > 6) {
-        speed = 11;
-    }
-    if (score > 9) {
-        speed = 14;
-    }
-    if (score > 14) {
-        speed = 17;
-    }*/
 }
 
 function checkGameOver () {
@@ -220,6 +235,7 @@ resetButton.addEventListener("click", function () {
 
     speedX = 0;
     speedY = 0;
+    speed = 6;
 
     setTimeout(renderBoard, 1000 / speed);
 
