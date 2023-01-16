@@ -78,27 +78,27 @@ function renderBoard () {
     setTimeout(renderBoard, 1000 / speed);
 
     if (score >= 3 && score < 6 && !speedIncrease){
-        speed = speed + 2;
+        speed = speed + 1;
         speedIncrease = true
         console.log('speed', speed);
     }
-    if (score >= 6 && score < 10 && speedIncrease) {
+    if (score >= 6 && score < 12 && speedIncrease) {
         speed = speed + 2;
         speedIncrease = false
         console.log('speed', speed);
     }
-    if (score >= 10 && score < 15 && !speedIncrease) {
+    if (score >= 12 && score < 24 && !speedIncrease) {
         speed = speed + 2;
         speedIncrease = true
         console.log('speed', speed);
     }
-    if (score >= 15 && score < 21 && speedIncrease) {
+    if (score >= 24 && score < 34 && speedIncrease) {
         speed = speed + 3;
         speedIncrease = false
         console.log('speed', speed);
     }
-    if (score >= 21 && !speedIncrease) {
-        speed = speed + 3;
+    if (score >= 34 && !speedIncrease) {
+        speed = speed + 4;
         speedIncrease = true
         console.log('speed', speed);
     }
