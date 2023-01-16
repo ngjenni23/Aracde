@@ -2,6 +2,7 @@ const board = document.getElementById("board");
 const context = board.getContext("2d");
 const scoreDisplay = document.getElementById("score");
 const roundDisplay = document.getElementById("round");
+const highestScoreDisplay = document.getElementById("highestScore");
 const title = document.getElementById("title");
 const subtitle = document.querySelector(".subtitle");
 const startButton = document.getElementById("start")
@@ -30,6 +31,10 @@ let speedY = 0;
 let score = 0;
 let round = 1;
 
+const scoreHistory = [];
+let highestScore = 0;
+let speedIncrease = false;
+
 window.onload = function startScreen () {
     board.style.display = "none";
     resetButton.style.display = "none";
@@ -41,8 +46,10 @@ startButton.addEventListener("click", function () {
     startButton.style.display = "none";
     board.style.display = "block";
     subtitle.style.display = "flex";
-    scoreDisplay.innerText = `Score: ${score}`;
-    roundDisplay.innerText = `Round: ${round}`;
+    scoreDisplay.innerText = `Current Score:${score}`;
+    roundDisplay.innerText = `Round:${round}`;
+    highestScoreDisplay.innerText = `Highest Score:${highestScore}`;
+
     renderBoard();
 });
 
@@ -52,20 +59,23 @@ function renderBoard () {
     if (result) {
         return;
     }
-    clearBoard();
     
+    if (score > 2 && !speedIncrease) {
+        speed += 3;
+        console.log('speedIncrease:', speedIncrease);
+        speedIncrease = true;
+        console.log('speed', speed);
+        console.log('speedIncrease:', speedIncrease)
+    }
+    clearBoard();
     checkEatApple();
     renderApple();
     renderSnake();
     setTimeout(renderBoard, 1000 / speed);
 
-    /*let speedIncrease = false;
-    if (score > 3 && !speedIncrease) {
-        speed += 3;
-        speedIncrease = true;
-        console.log('score', score);
-    }*/ 
+    
     //unoptimized score inc
+    /*
     if (score > 3) {
         speed = 9;
     }
@@ -77,7 +87,7 @@ function renderBoard () {
     }
     if (score > 14) {
         speed = 17;
-    }
+    }*/
 }
 
 function checkGameOver () {
@@ -143,11 +153,23 @@ function checkEatApple () {
     if (snakeHeadX === appleX && snakeHeadY === appleY) {
         appleX = Math.floor(Math.random() * boardSize);
         appleY = Math.floor(Math.random() * boardSize);
+
         snakeBody++;
+
         score++;
-        scoreDisplay.innerText = `Score: ${score}`;
+        scoreDisplay.innerText = `Current Score:${score}`;
         console.log('score', score);
+        
+        scoreHistory.push(score)
+        console.log("scoreHistory",scoreHistory);
+        getHighestScore();
+        highestScoreDisplay.innerHTML = `Highest Score:${highestScore}`;
     }
+}
+
+function getHighestScore () {
+   highestScore =  Math.max(...scoreHistory);
+   console.log("highestScore", highestScore, "type", typeof highestScore);
 }
 
 document.body.addEventListener('keydown', moveDirection);
@@ -202,14 +224,14 @@ resetButton.addEventListener("click", function () {
     setTimeout(renderBoard, 1000 / speed);
 
     score = 0;
-    scoreDisplay.innerText = `Score: ${score}`;
+    scoreDisplay.innerText = `Score:${score}`;
 
     round++;
-    console.log('round', round);
-    roundDisplay.innerText = `Round: ${round}`;
+    roundDisplay.innerText = `Round:${round}`;
 
     title.innerText = "Snake";
     title.style.color = "white";
     
+    resetButton.style.display = "none";
 });
 
